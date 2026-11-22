@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://feng20100326.github.io/cloud-gpu-cost-compare/sitemap.xml
