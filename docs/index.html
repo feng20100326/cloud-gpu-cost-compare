@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloud GPU Cost Comparison — Free Tiers vs Per-Second Rentals (2026-11)</title>
+<meta name="description" content="Verified 2026-11-22 comparison of Colab/Kaggle free tiers vs per-second GPU rentals (RunPod, SaladCloud, Clore.ai). Official prices and quotes with sources.">
+<style>
+  :root{--fg:#1a1d21;--bg:#fff;--mut:#5b6470;--line:#e3e6ea;--acc:#0b6bcb;--warn:#8a5a00;--warnbg:#fff8e6;--card:#fafbfc}
+  @media (prefers-color-scheme:dark){:root{--fg:#e6e9ec;--bg:#0f1215;--mut:#9aa4b1;--line:#262c33;--acc:#5aa9ff;--warn:#e0b060;--warnbg:#1c1a12;--card:#161a1e}}
+  *{box-sizing:border-box}
+  body{margin:0;padding:32px 20px 64px;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;color:var(--fg);background:var(--bg)}
+  main{max-width:920px;margin:0 auto}
+  h1{font-size:1.9rem;line-height:1.25;margin:0 0 6px}
+  h2{font-size:1.25rem;margin:34px 0 10px;padding-top:14px;border-top:1px solid var(--line)}
+  .meta{color:var(--mut);font-size:.92rem;margin:0 0 6px}
+  .sub{color:var(--mut);font-size:.95rem;margin:0 0 22px}
+  a{color:var(--acc)}
+  table{width:100%;border-collapse:collapse;margin:12px 0 6px;font-size:.92rem}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--card);font-weight:600}
+  .note{background:var(--warnbg);border-left:3px solid var(--warn);padding:12px 14px;margin:14px 0;font-size:.92rem;border-radius:0 4px 4px 0}
+  .note b{color:var(--warn)}
+  .disc{background:var(--card);border:1px solid var(--line);padding:14px 16px;border-radius:6px;margin:14px 0;font-size:.93rem}
+  code{background:var(--card);padding:2px 5px;border-radius:3px;font-size:.88em}
+  .cta{display:inline-block;background:var(--acc);color:#fff;text-decoration:none;padding:9px 16px;border-radius:6px;font-weight:600;font-size:.95rem}
+  ul{padding-left:22px}
+  li{margin:4px 0}
+  .src{font-size:.86rem;color:var(--mut)}
+  .src td{padding:6px 8px}
+  footer{margin-top:40px;color:var(--mut);font-size:.84rem;border-top:1px solid var(--line);padding-top:14px}
+  .zh{font-size:.92rem;color:var(--mut)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Cloud GPU cost comparison</h1>
+  <p class="meta">Free tiers vs per-second rentals — <b>all figures verified 2026-11-22</b></p>
+  <p class="sub">Prices and free-tier quotas change constantly. Re-check each vendor's page on the day you buy.<br>
+  <span class="zh">中文版 / 速查表：<a href="https://github.com/feng20100326/cloud-gpu-cost-compare">README.md</a> · <a href="https://github.com/feng20100326/cloud-gpu-cost-compare/blob/main/docs/gpu-cost-cheatsheet.md">Cheat sheet</a></span></p>
+
+  <h2>TL;DR</h2>
+  <ul>
+    <li><b>Validate an idea</b> → Colab / Kaggle free tier ($0, but see the official quotes).</li>
+    <li><b>Job must finish</b> → per-second rental: a 4090-class card is around $1/hour, so an interruption costs cents.</li>
+    <li><b>Lowest price, resumable work</b> → SaladCloud "Lowest" tier: $0.015/hr — <b>and the most interruptible</b>.</li>
+    <li><b>48–80 GB VRAM</b> → compare at that tier; that is where the real price spread lives.</li>
+    <li><b>Price shopping / on-off flexibility</b> → hourly marketplaces (e.g. Clore.ai) — machines are third-party, so no vendor SLA.</li>
+  </ul>
+
+  <h2>Comparison</h2>
+  <table>
+    <tr><th>Option</th><th>Cost</th><th>Supply</th><th>Good for</th><th>Main catch</th></tr>
+    <tr><td>Colab free tier</td><td>$0</td><td>Official free quota</td><td>Learning, notebooks, small experiments</td><td>Official FAQ: resources are <b>not guaranteed</b>, limits fluctuate; free tier access to GPUs is <b>heavily restricted</b>; can disconnect anytime</td></tr>
+    <tr><td>Kaggle free quota</td><td>$0 (quota hours: see official page)</td><td>Official free quota</td><td>Notebooks, Kaggle-dataset experiments</td><td>Weekly quota and card type vary; interrupted runs restart</td></tr>
+    <tr><td>SaladCloud</td><td><b>from $0.015/hr</b>, per-second billing</td><td>Distributed idle consumer GPUs</td><td>Batch inference, data processing, dry-runs</td><td><b>Cheapest and most interruptible</b> — see note below</td></tr>
+    <tr><td>RunPod (per-second)</td><td>RTX 4090 24G <b>$0.89/hr</b> · L4 24G <b>$0.69/hr</b> · A6000 48G <b>$0.69/hr</b> · RTX 6000 Ada 48G <b>$1.09/hr</b> · H100 PCIe 80G <b>$2.89/hr</b> (Secure)</td><td>Hosted GPUs, per-second billing</td><td>Training, fine-tuning, jobs needing a stable machine</td><td>Storage / volumes billed separately; H100 &amp; A100 jump a price bracket</td></tr>
+    <tr><td>Clore.ai (hourly marketplace)</td><td>Floats with live supply; GPUs owned by third-party compute providers</td><td>Decentralised marketplace bidding</td><td>Price shopping, mid-size jobs, on/off flexibility</td><td><b>Third-party machines → reliability varies. Load-test it yourself; this is not a vendor-grade SLA.</b></td></tr>
+  </table>
+
+  <div class="note">
+    <b>Read this before quoting $0.015.</b><br>
+    SaladCloud's <code>$0.015/hr</code> is the official <b>"Lowest" priority</b> starting price (RTX 3060 / 3070 / 3070 Ti class). The same official page states, in its own words:
+    <ul>
+      <li><i>"Lowest is the lowest cost and the most interruptible"</i></li>
+      <li><i>"May be preempted by higher-priority groups. Minimum run before reallocation is roughly 30 minutes."</i></li>
+      <li><b>Billed per second.</b></li>
+    </ul>
+    Comparing $0.015/hr against a $0.69+/hr hosted card compares <b>the cheapest-and-most-likely-to-be-killed tier</b> with <b>a stable hosted machine</b>. Running a long 4090-class job on that tier, being preempted is expected. It suits batch work you can resume — not a job that must finish in one go.
+  </div>
+
+  <h2>Official quotes</h2>
+  <table class="src">
+    <tr><th>Vendor</th><th>Quote</th></tr>
+    <tr><td>Google Colab</td><td><i>"Colab resources are not guaranteed and are not unlimited, and usage limits sometimes fluctuate."</i> · <i>"access to expensive resources like GPUs is heavily restricted"</i></td></tr>
+    <tr><td>SaladCloud</td><td><i>"SaladCloud Pricing — GPUs from $0.015 per hour, billed per second"</i> · <i>"Lowest is the lowest cost and the most interruptible"</i></td></tr>
+    <tr><td>RunPod</td><td>Per-second billing; published hourly rates listed in the table above</td></tr>
+    <tr><td>Clore.ai</td><td><code>renter_referral = (renter_base_fee + renter_extra_fee) × commission_rate</code></td></tr>
+  </table>
+
+  <h2>How I decide</h2>
+  <table>
+    <tr><th>Situation</th><th>What I do</th></tr>
+    <tr><td>Writing code, validating an idea</td><td>Run it on the free tier first; record the VRAM and wall-clock you actually need</td></tr>
+    <tr><td>Steady demand, must run for days</td><td>Switch to per-second billing; stop it when idle</td></tr>
+    <tr><td>Training / fine-tuning needing 48–80 GB</td><td>Compare at that VRAM tier — that is where the real spread is</td></tr>
+    <tr><td>Want multi-vendor comparison and easy on/off</td><td>Try an hourly marketplace; load-test it before trusting it</td></tr>
+  </table>
+
+  <h2>Affiliate disclosure</h2>
+  <div class="disc">
+    The Clore.ai link below is my <b>affiliate link</b>. <b>I earn a commission only if you pay — not if you sign up.</b> The commission comes out of the platform fee Clore already charges on a paid marketplace purchase, and the base is that fee, <b>not</b> your total spend:<br><br>
+    <code>referral = (base_fee + extra_fee) × commission_rate</code><br><br>
+    <b>My current rate is 15% of that fee.</b> This is not "15% of what you spend", and not "15% the moment you refer someone" — if the person you refer never pays for compute, the commission is <b>$0</b>. The payout threshold on my account is <b>$20</b> (dashboard shows CLORE 10000 / BTC 0.0002 / USD 20), so small earnings accumulate before they can be withdrawn.<br><br>
+    If you would rather not use an affiliate link, just go to <code>clore.ai</code> directly — every number above comes from the vendors' own published pages either way.
+    <div style="margin-top:12px"><a class="cta" href="https://clore.ai/register?ref_id=1zyqnh0c&utm_source=github&utm_medium=pages&utm_campaign=cloud-gpu-cost-compare">Open Clore.ai (affiliate link)</a></div>
+  </div>
+
+  <h2>Sources</h2>
+  <table class="src">
+    <tr><td>Colab free tier wording &amp; restrictions</td><td><a href="https://research.google.com/colaboratory/faq.html">research.google.com/colaboratory/faq.html</a></td></tr>
+    <tr><td>Kaggle free GPU quota (hours: see the page)</td><td><a href="https://www.kaggle.com/docs/efficient-gpu-usage">kaggle.com/docs/efficient-gpu-usage</a></td></tr>
+    <tr><td>SaladCloud pricing, per-second billing, "Lowest" tier, preemption rules</td><td><a href="https://salad.com/pricing">salad.com/pricing</a></td></tr>
+    <tr><td>RunPod per-second hourly prices</td><td><a href="https://www.runpod.io/pricing">runpod.io/pricing</a></td></tr>
+    <tr><td>Clore.ai commission formula, tiers, payout thresholds</td><td><a href="https://docs.clore.ai/getting-started/deposit-withdrawal/referral-program.md">docs.clore.ai referral-program</a></td></tr>
+  </table>
+  <p class="sub"><b>Not verified:</b> Kaggle's exact weekly GPU-hour figure (the docs page renders client-side, no citable number extracted) and live Clore.ai marketplace prices (they float with supply). Both are marked "see the official page" rather than filled with guessed numbers.</p>
+
+  <footer>
+    This is a cost comparison, not investment advice, and it makes no earnings promise. Compute availability and pricing are not guaranteed by any vendor named here. All figures carry a capture date (2026-11-22) and a source link.<br>
+    Repository: <a href="https://github.com/feng20100326/cloud-gpu-cost-compare">github.com/feng20100326/cloud-gpu-cost-compare</a>
+  </footer>
+</main>
+</body>
+</html>
