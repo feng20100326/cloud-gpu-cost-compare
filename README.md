@@ -2,6 +2,9 @@
 
 > 数据抓取时点：**2026-11-22**。价格与额度会变，下单前请以各平台官方页面当日显示为准。
 
+**在线阅读版（可直接分享）**：https://feng20100326.github.io/cloud-gpu-cost-compare/
+**English version**: [README.en.md](README.en.md) · **速查表**: [docs/gpu-cost-cheatsheet.md](docs/gpu-cost-cheatsheet.md)
+
 ---
 
 ## 先说结论

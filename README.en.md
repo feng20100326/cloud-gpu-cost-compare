@@ -2,7 +2,8 @@
 
 > **Verified 2026-11-22.** Prices and free-tier quotas change constantly — re-check each vendor's own page before you buy.
 
-**中文版见 [README.md](README.md) · 快速选型速查表见 [docs/gpu-cost-cheatsheet.md](docs/gpu-cost-cheatsheet.md)**
+**Read it online (shareable)**: https://feng20100326.github.io/cloud-gpu-cost-compare/
+**中文版**: [README.md](README.md) · **Cheat sheet**: [docs/gpu-cost-cheatsheet.md](docs/gpu-cost-cheatsheet.md)
 
 ---
 
